@@ -1,0 +1,74 @@
+# .zshrc
+
+# starship
+eval "$(starship init zsh)"
+
+# zoxide - jump
+eval "$(zoxide init zsh)"
+
+# fzf - fuzzy file finder
+eval "$(fzf --zsh)"
+
+# proto
+export PROTO_HOME="$HOME/.proto"
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+
+# go
+export GOBIN="$HOME/go/bin"
+export PATH="$GOBIN:$PATH"
+
+# tere
+tere() {
+    local result=$(command tere "$@")
+    [ -n "$result" ] && cd -- "$result"
+}
+
+# libpq / psql
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# jdk
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+
+# mise
+eval "$(~/.local/bin/mise activate zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/user/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# Windsurf
+export PATH="/Users/user/.codeium/windsurf/bin:$PATH"
+
+# alias
+alias reload="source ~/.zshrc"
+alias s="reload"
+alias cm="chezmoi" # Chezmoi dotfiles manager
+alias batt="pmset -g batt"
+alias o="open"
+alias t="tree -L 4 -I 'node_modules|dist|.cache'"
+alias tr="tree --du -h -L 4-I 'node_modules|dist|.cache'"
+alias ls="eza --icons -F -H --group-directories-first --git -1"
+alias la="ls -la"
+alias search="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}' | xargs nvim"
+alias g="git"
+alias gg="git"
+alias gi="git"
+alias gt="gt"
+alias gh="gh" # GitHub CLI
+alias ghw="gh repo view --web"
+alias n="npm"
+alias y="yarn"
+alias p="pnpm"
+alias b="bun"
+alias d="deno"
+alias co="code" # VS Code
+alias cu="cursor" # Cursor.com
+alias ws="windsurf" # Windsurf Editor
+alias v="nvim" # NeoVim
+alias vim="nvim" # NeoVim
+
+# EOF
+
